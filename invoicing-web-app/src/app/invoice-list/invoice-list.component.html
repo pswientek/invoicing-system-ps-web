@@ -1,10 +1,11 @@
-<table class="table table-striped">
+<table class="table-striped">
   <tr>
     <th>Number</th>
     <th>Issue date</th>
     <th>Buyer</th>
     <th>Seller</th>
     <th>Entries</th>
+    <th></th>
   </tr>
   <tr *ngFor="let invoice of invoices">
     <td *ngIf="!invoice.editMode">{{invoice.number}}</td>
@@ -28,16 +29,23 @@
                                         class="form-control" name="entries"></td>
 
     <td>
-      <button *ngIf="!invoice.editMode" (click)="triggerUpdate(invoice)" class="btn btn-secondary">Edit</button>
+      <button *ngIf="!invoice.editMode" (click)="triggerUpdate(invoice)" class="primary">Edit</button>
       <span *ngIf="!invoice.editMode">&nbsp;</span>
-      <button *ngIf="!invoice.editMode" (click)="deleteInvoice(invoice)" class="btn btn-danger">Delete</button>
+      <button *ngIf="!invoice.editMode" (click)="deleteInvoice(invoice)" class="delete">Delete</button>
+      <span *ngIf="!invoice.editMode">&nbsp;</span>
+      <button><a class="cancel"
+                 *ngIf="!invoice.editMode"
+                 (click)="triggerDetail(invoice)"
+                 routerLink="/invoice-detail"
+                 ariaCurrentWhenActive="page">Detail</a>
+      </button>
 
 
-      <button *ngIf="invoice.editMode" (click)="updateInvoice(invoice)" class="btn btn-primary">Update
+      <button *ngIf="invoice.editMode" (click)="updateInvoice(invoice)" class="primary">Update
         invoice</button>
       <span *ngIf="invoice.editMode">&nbsp;</span>
       <button *ngIf="invoice.editMode" (click)="cancelInvoiceUpdate(invoice)"
-              class="btn btn-secondary">Cancel</button>
+              class="cancel">Cancel</button>
     </td>
   </tr>
   <tr>
@@ -76,7 +84,7 @@
       <tr><input [(ngModel)]="newInvoice.entries.carExpenses.personalUsage" type="text" class="form-control"
                  name="personalUsage"></tr>
     </td>
-    <td><input (click)="addInvoice()" type="button" class="btn btn-primary" value="Add invoice"></td>
+    <td><input (click)="addInvoice()" type="button" class="primary" value="Add invoice"></td>
   </tr>
 
 </table>

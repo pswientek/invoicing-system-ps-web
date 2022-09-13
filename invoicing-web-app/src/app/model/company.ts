@@ -12,5 +12,6 @@ export class Company {
     public pensionInsurance: number
 
   ) {
+
   }
 }

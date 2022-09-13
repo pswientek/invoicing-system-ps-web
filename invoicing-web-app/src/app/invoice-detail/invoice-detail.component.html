@@ -1,0 +1,14 @@
+<p>invoice-detail works!</p>
+
+
+
+<table>
+  <tr><th>Number</th>
+    <td *ngFor="let invoice of invoices"><input [(ngModel)]="invoice.detailInvoice.number" type="text"
+               class="form-control"
+               name="number"></td></tr>
+  <tr><th>Issue date</th></tr>
+  <tr><th>Buyer</th></tr>
+  <tr><th>Seller</th></tr>
+  <tr><th>Entries</th></tr>
+</table>

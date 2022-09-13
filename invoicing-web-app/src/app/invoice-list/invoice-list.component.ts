@@ -15,18 +15,18 @@ export class InvoiceListComponent implements OnInit {
 
     invoices: Invoice[] = [];
 
-    newInvoice: Invoice = new Invoice(
-      0,
-      "",
-      new Date(),
-      new Company(0, "", "", "", 0, 0),
-      new Company(0, "", "", "", 0, 0),
-      new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false)));
+    newInvoice = new Invoice(
+          0,
+          "",
+          new Date(),
+          new Company(0, "", "", "", 0, 0),
+          new Company(0, "", "", "", 0, 0),
+          new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false)));
 
-    newBuyer: Company = new Company(0, "", "", "", 0, 0);
-    newSeller: Company = new Company(0, "", "", "", 0, 0);
-    newEntries: InvoiceEntries = new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false));
-    newCar: Car = new Car(0, "", false);
+    newBuyer = new Company(0, "", "", "", 0, 0);
+    newSeller = new Company(0, "", "", "", 0, 0);
+    newEntries = new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false));
+    newCar = new Car(0, "", false);
 
     constructor(
       private invoicesService: InvoiceService
@@ -41,20 +41,20 @@ export class InvoiceListComponent implements OnInit {
     }
 
     addInvoice() {
-            this.invoicesService.addInvoice(this.newInvoice)
-                .subscribe(id => {
-                    this.newInvoice.id = id;
-                    this.invoices.push(this.newInvoice);
+                this.invoicesService.addInvoice(this.newInvoice)
+                    .subscribe(id => {
+                        this.newInvoice.id = id;
+                        this.invoices.push(this.newInvoice);
 
-                    this.newInvoice = new Invoice(
-                      0,
-                      "",
-                      new Date(),
-                      new Company(0, "", "", "", 0, 0),
-                      new Company(0, "", "", "", 0, 0),
-                      new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false)));
-                });
-        }
+                        this.newInvoice = new Invoice(
+                          0,
+                          "",
+                          new Date(),
+                          new Company(0, "", "", "", 0, 0),
+                          new Company(0, "", "", "", 0, 0),
+                          new InvoiceEntries(0, "", 0, 0, 0, 0, new Car(0, "", false)));
+                    });
+            }
 
     deleteInvoice(invoiceToDelete: Invoice) {
             this.invoicesService.deleteInvoice(invoiceToDelete.id)
@@ -74,6 +74,17 @@ export class InvoiceListComponent implements OnInit {
       )
       invoice.editMode = true;
     }
+
+    triggerDetail(invoice: Invoice) {
+            invoice.detailInvoice = new Invoice(
+              invoice.id,
+              invoice.number,
+              invoice.date,
+              invoice.buyer,
+              invoice.seller,
+              invoice.entries
+            )
+          }
 
     cancelInvoiceUpdate(invoice: Invoice) {
       invoice.editMode = false;

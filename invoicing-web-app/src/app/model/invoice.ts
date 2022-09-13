@@ -5,11 +5,12 @@ export class Invoice {
 
   public editMode: boolean = false;
   public editedInvoice: Invoice = null;
+  public detailInvoice: Invoice = null;
 
   constructor(
     public id: number,
     public number: string,
-    public date: Date,
+    public date: any,
     public buyer: Company,
     public seller: Company,
     public entries: InvoiceEntries

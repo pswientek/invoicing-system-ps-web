@@ -9,9 +9,9 @@ const PATH = 'companies';
 @Injectable({providedIn: 'root'})
 export class CompanyService {
 
-  contentType = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json' })
+  options = {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          withCredentials: true
   };
 
   constructor(private http: HttpClient){
@@ -22,15 +22,15 @@ export class CompanyService {
   }
 
   addCompany(company: Company): Observable<any> {
-    return this.http.post<any>(this.apiUrl(PATH), this.toCompanyRequest(company), this.contentType);
+    return this.http.post<any>(this.apiUrl(PATH), this.toCompanyRequest(company), this.options);
   }
 
   deleteCompany(id: number): Observable<any> {
-    return this.http.delete<any>(this.apiUrl(PATH, id));
+    return this.http.delete<any>(this.apiUrl(PATH, id), this.options);
   }
 
   editCompany(company: Company): Observable<any> {
-    return this.http.put<any>(this.apiUrl(PATH, company.id), this.toCompanyRequest(company), this.contentType);
+    return this.http.put<any>(this.apiUrl(PATH, company.id), this.toCompanyRequest(company), this.options);
   }
 
   private apiUrl(service: string, id: number = null): string {
