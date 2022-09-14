@@ -1,0 +1,24 @@
+    <nav class="navBar">
+      <a class="button"
+         routerLink="/home-page"
+         routerLinkActive="activebutton"
+         ariaCurrentWhenActive="page">
+        Home
+      </a>
+      <a *ngIf="this.authService.isLoggedIn"
+          class="button"
+         routerLink="/company-list"
+         routerLinkActive="activebutton"
+         ariaCurrentWhenActive="page">
+        Companies List
+      </a>
+      <a *ngIf="!this.authService.isLoggedIn"
+         class="button" routerLinkActive="active" routerLink="/log-in">
+        Sign in
+      </a>
+      <a *ngIf="!this.authService.isLoggedIn" class="btn btn-outline-primary" routerLinkActive="active"
+         routerLinkActive="active" routerLink="/sign-up">Sign up</a>
+      <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button" class="btn btn-danger">Logout</button>
+    </nav>
+
+<router-outlet></router-outlet>
