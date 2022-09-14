@@ -33,7 +33,7 @@ export class CompanyService {
     return this.http.put<any>(this.apiUrl(PATH, company.id), this.toCompanyRequest(company), this.options);
   }
 
-  private apiUrl(service: string, id: number = null): string {
+  private apiUrl(service: string, id: number | null = null): string {
     const idInUrl = (id !== null ? '/' + id : '');
 
     return environment.apiUrl + '/' + service + idInUrl;
