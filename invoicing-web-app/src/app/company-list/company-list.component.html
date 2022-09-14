@@ -29,7 +29,7 @@
                                         class="form-control" name="healthInsurance"></td>
 
     <td>
-      <button *ngIf="!company.editMode" (click)="triggerUpdate(company)" class="primary">Edit</button>
+      <button *ngIf="!company.editMode" (click)="triggerUpdate(company)" class="secondary">Edit</button>
       <span *ngIf="!company.editMode">&nbsp;</span>
       <button *ngIf="!company.editMode" (click)="deleteCompany(company)" class="delete">Delete</button>
 
