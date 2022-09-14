@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Company } from "../model/company";
 import { CompanyService } from "../service/company-service";
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-company-list',
@@ -14,9 +16,17 @@ export class CompanyListComponent implements OnInit {
 
     newCompany: Company = new Company(0, "", "", "", 0, 0);
 
+    currentUser: any = {};
+
     constructor(
-      private companiesService: CompanyService
+      private companiesService: CompanyService,
+      public authService: AuthService,
+      private actRoute: ActivatedRoute
     ) {
+        let id = this.actRoute.snapshot.paramMap.get('id');
+        this.authService.getUserProfile(id).subscribe((res) => {
+          this.currentUser = res.msg;
+        });
     }
 
     ngOnInit(): void {
