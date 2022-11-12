@@ -1,0 +1,90 @@
+<table class="table-striped">
+  <tr>
+    <th>Number</th>
+    <th>Issue date</th>
+    <th>Buyer</th>
+    <th>Seller</th>
+    <th>Entries</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let invoice of invoices">
+    <td *ngIf="!invoice.editMode">{{invoice.number}}</td>
+    <td *ngIf="invoice.editMode"><input [(ngModel)]="invoice.editedInvoice.number" type="text"
+                                        class="form-control" name="number"></td>
+
+    <td *ngIf="!invoice.editMode">{{invoice.date}}</td>
+    <td *ngIf="invoice.editMode"><input [(ngModel)]="invoice.editedInvoice.date" type="text" class="form-control"
+                                        name="date"></td>
+
+    <td *ngIf="!invoice.editMode">{{invoice.buyer.name}}</td>
+    <td *ngIf="invoice.editMode"><input [(ngModel)]="invoice.editedInvoice.buyer" type="text" class="form-control"
+                                        name="buyer"></td>
+
+    <td *ngIf="!invoice.editMode">{{invoice.seller.name}}</td>
+    <td *ngIf="invoice.editMode"><input [(ngModel)]="invoice.editedInvoice.seller" type="text"
+                                        class="form-control" name="seller"></td>
+
+    <td *ngIf="!invoice.editMode">{{invoice.entries.description}}</td>
+    <td *ngIf="invoice.editMode"><input [(ngModel)]="invoice.editedInvoice.entries" type="text"
+                                        class="form-control" name="entries"></td>
+
+    <td>
+      <button *ngIf="!invoice.editMode" (click)="triggerUpdate(invoice)" class="primary">Edit</button>
+      <span *ngIf="!invoice.editMode">&nbsp;</span>
+      <button *ngIf="!invoice.editMode" (click)="deleteInvoice(invoice)" class="delete">Delete</button>
+      <span *ngIf="!invoice.editMode">&nbsp;</span>
+      <button><a class="cancel"
+                 *ngIf="!invoice.editMode"
+                 (click)="triggerDetail(invoice)"
+                 routerLink="/invoice-detail"
+                 ariaCurrentWhenActive="page">Detail</a>
+      </button>
+
+
+      <button *ngIf="invoice.editMode" (click)="updateInvoice(invoice)" class="primary">Update
+        invoice</button>
+      <span *ngIf="invoice.editMode">&nbsp;</span>
+      <button *ngIf="invoice.editMode" (click)="cancelInvoiceUpdate(invoice)"
+              class="cancel">Cancel</button>
+    </td>
+  </tr>
+  <tr>
+    <td><input [(ngModel)]="newInvoice.number" type="text" class="form-control"
+               name="number"></td>
+    <td><input [(ngModel)]="newInvoice.date" type="text" class="form-control" name="date"></td>
+    <td>
+      <tr><input [(ngModel)]="newInvoice.buyer.taxIdentificationNumber" type="text" class="form-control"
+                   name="taxIdentificationNumber"></tr>
+      <tr><input [(ngModel)]="newInvoice.buyer.address" type="text" class="form-control" name="address"></tr>
+      <tr><input [(ngModel)]="newInvoice.buyer.name" type="text" class="form-control" name="name"></tr>
+      <tr><input [(ngModel)]="newInvoice.buyer.pensionInsurance" type="text" class="form-control" name="pensionInsurance"></tr>
+      <tr><input [(ngModel)]="newInvoice.buyer.healthInsurance" type="text" class="form-control" name="healthInsurance"></tr>
+    </td>
+    <td>
+      <tr><input [(ngModel)]="newInvoice.seller.taxIdentificationNumber" type="text" class="form-control"
+                   name="taxIdentificationNumber"></tr>
+      <tr><input [(ngModel)]="newInvoice.seller.address" type="text" class="form-control" name="address"></tr>
+      <tr><input [(ngModel)]="newInvoice.seller.name" type="text" class="form-control" name="name"></tr>
+      <tr><input [(ngModel)]="newInvoice.seller.pensionInsurance" type="text" class="form-control" name="pensionInsurance"></tr>
+      <tr><input [(ngModel)]="newInvoice.seller.healthInsurance" type="text" class="form-control" name="healthInsurance"></tr>
+    </td>
+    <td>
+      <tr><input [(ngModel)]="newInvoice.entries.description" type="text" class="form-control"
+                 name="description"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.quantity" type="text" class="form-control"
+                 name="quantity"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.price" type="text" class="form-control"
+                 name="price"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.vatValue" type="text" class="form-control"
+                 name="VatValue"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.vatRate" type="text" class="form-control"
+                 name="vatRate"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.carExpenses.registrationPlate" type="text" class="form-control"
+                 name="registrationPlate"></tr>
+      <tr><input [(ngModel)]="newInvoice.entries.carExpenses.personalUsage" type="text" class="form-control"
+                 name="personalUsage"></tr>
+    </td>
+    <td><input (click)="addInvoice()" type="button" class="primary" value="Add invoice"></td>
+  </tr>
+
+</table>
